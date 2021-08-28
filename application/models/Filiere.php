@@ -72,6 +72,46 @@ class Filiere extends DBTable
 
         return $this;
     }
+
+    public getListeRandomFiliere()
+    {
+        $requete="select * from Filiere";
+		$query=$this->db->query($requete);
+        $result=array();
+		foreach($query->result_array() as $row)
+		{
+			$result[]=$row;		
+		}	       
+		return randomResult($result);
+    }
+
+    public function randomResult($arrayListe)
+    {
+        $listedIndex=array();
+        $retour=array();
+        foreach($arrayListe as $value)
+        {
+
+            $index=rand(0,count($arrayListe));
+            while(verifyDistinctNumber($index,$listedIndex)==false)
+            {
+                $index=rand(0,count($arrayListe));
+            }
+            listedIndex[]=$index;
+            $retour[]=$value[$index];
+        }
+        return $retour;
+    }
+ public function verifyDistinctNumber($index,$arrayNumber)
+    {
+        for($i=0,$i<$count($arrayNumber),$i++)
+        {
+            if($arrayNumber[$i]==$index)
+            {
+                return false;
+            }
+        }
+    }
 }
 
 ?>
