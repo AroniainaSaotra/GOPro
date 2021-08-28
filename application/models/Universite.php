@@ -9,6 +9,7 @@ class Universite extends DBTable
 	private $logo;
     private $slogan;
     private $description;
+    private $anneeCreation;
 	/**
 	 * Class Constructor
 	 * @param    $id   
@@ -105,6 +106,19 @@ class Universite extends DBTable
 
         return $this;
     }
+
+    public function getAnneeCreation()
+    {
+        return $this->anneeCreation;
+    }
+
+    
+    public function setAnneeCreation($i)
+    {
+        $this->AnneeCreation = $i;
+
+        return $this;
+    }
 }
 
-?>description
+?>
