@@ -1,7 +1,7 @@
 INSERT INTO filiere(id,intitule,descriptionFiliere) VALUES
-    (1,'Droit','C’est l’ensemble des règles imposées aux membres d’une société pour que leurs rapports sociaux échappent à l’arbitraire et à la violence des individus et soient conformes à l’éthique dominante.');
-    (2,'Informatique','L informatique est un domaine d activité scientifique, technique, et industriel concernant le traitement automatique de l information numérique par l exécution de programmes informatiques par des machines : des systèmes embarqués, des ordinateurs, des robots, des automates, etc.');
-    (3,'Aviation','L’aviation est une activité aérienne définie par l’ensemble des acteurs, technologies et règlements qui permettent d’utiliser un aéronef dans un but particulier. Ces diverses activités peuvent être classées en 	activités de sport et loisir, activités économiques et activités militaires.');
+    (1,'Droit','C’est l’ensemble des règles imposées aux membres d’une société pour que leurs rapports sociaux échappent à l’arbitraire et à la violence des individus et soient conformes à l’éthique dominante.'),
+    (2,'Informatique','L informatique est un domaine d activité scientifique, technique, et industriel concernant le traitement automatique de l information numérique par l exécution de programmes informatiques par des machines : des systèmes embarqués, des ordinateurs, des robots, des automates, etc.'),
+    (3,'Aviation','L’aviation est une activité aérienne définie par l’ensemble des acteurs, technologies et règlements qui permettent d’utiliser un aéronef dans un but particulier. Ces diverses activités peuvent être classées en 	activités de sport et loisir, activités économiques et activités militaires.'),
     (4,'Agronomie','Intitulé : L agronomie est l ensemble des sciences exactes, naturelles, économiques et sociales, et des techniques auxquelles il est fait appel dans la pratique et la compréhension de l agriculture. Les sciences vétérinaires sont parfois exclues de cette définition.');
 
 INSERT INTO branche(id,idFiliere,intitule,descriptionBranche) VALUES

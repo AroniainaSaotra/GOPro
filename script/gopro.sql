@@ -38,10 +38,10 @@ create table filiere (
 
 create table branche (
 	id int not null primary key auto_increment,
-	idFilere int not null,
+	idFiliere int not null,
 	intitule varchar(50) not null,
 	descriptionBranche text not null,
-	foreign key(idFilere) references filiere(id)
+	foreign key(idFiliere) references filiere(id)
 )ENGINE=InnoDB;
 
 create table competence (
