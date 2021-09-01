@@ -76,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         public function where()
         {
         	$attributs = $this->getAttrNotNull();
-	    	if(count($attributs)==0)return ";";
+	    	if(count($attributs)==0)return "";
 	    	$where = " where ";
 	    	$x=0;
 	    	foreach($attributs as $attr)
@@ -94,6 +94,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    	$requete = "select * from ".$this->getNameLc()." ";
 	    	print($requete.$this->where()." ".$findDeRequete);
 	    	return $requete.$this->where()." ".$findDeRequete;
+	    }
+
+	    public function randomList($nombre){
+
+	    	$requete = "select count(*) as isa from ".$this->getNameLc()." ";
+	    	$result = $this->connection()->query($requete);
+	    	$rep = $result->result();
+	    	$number=null;
+	    	foreach ($rep as $response) {
+	    		$number = $response->isa;
+	    	}
+	    	$list = array();
+	    	$list[] = rand(1,$nombre);
+	    	$isa = 1;
+	    	while($isa<$nombre){
+	    		$try=rand(1,$number);
+	    		var_dump($isa);
+	    		while($this->inside($list,$try)){
+	    			$try=rand(1,$number);
+	    		}
+	    		$list[]=$try;
+	    		$isa++;
+	    	}
+	    	var_dump($list);
+	    	$class = new ReflectionClass($this);
+            $result = $class->newInstance();
+            $requete = 'where id in (';
+	    	for($x=0;$x<count($list);$x++){
+	    		$requete = $requete.$list[$x];
+	    		if ($x<count($list)-1)$requete = $requete.',';
+	    	}
+	    	$requete = $requete.')';
+	    	var_dump('requete         '.$requete);
+	    	return $this->find($requete);
+	    }
+
+	    public function inside($list,$valeur){
+	    	for($i=0;$i<count($list);$i++){
+	    		if($list[$i]==$valeur){
+	    			return true;
+	    		}
+	    	}
+	    	return false;
 	    }
 
 	    public function requeteInsert()
@@ -147,6 +190,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    public function find($findDeRequete)
         {
             $requete = $this->requeteFind($findDeRequete);
+            var_dump('le tena requete  '.$requete);
             $result = $this->connection()->query($requete);
             if($result == false)
             {
