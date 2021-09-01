@@ -60,9 +60,9 @@ create table relUniversiteBranche (
 
 create table competenceRequiseUniversite(
 	idRelUniversiteBranche int not null,
-	idCompetance int not null,
+	idCompetence int not null,
 	foreign key(idRelUniversiteBranche) references relUniversiteBranche(id),
-	foreign key(idCompetance) references competence(id)                                                                                                                                                                                                                                                     
+	foreign key(idCompetence) references competence(id)                                                                                                                                                                                                                                                     
 )ENGINE=InnoDB;
 
 create table metier (
@@ -86,9 +86,9 @@ create table niveauRequisMetier (
 
 create table competenceRequiseMetier(
 	idMetier int not null,
-	idCompetance int not null,
-	foreign key(idRelUniversiteBranche) references relUniversiteBranche(id),
-	foreign key(idCompetance) references competence(id)                                                                                                                                                                                                                                                     
+	idCompetence int not null,
+	foreign key(idMetier) references metier(id),
+	foreign key(idCompetence) references competence(id)                                                                                                                                                                                                                                                     
 )ENGINE=InnoDB;
 
 
