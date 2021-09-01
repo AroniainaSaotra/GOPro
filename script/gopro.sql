@@ -32,13 +32,14 @@ create table relEmplacementUniversite (
 
 create table filiere (
 	id int not null primary key auto_increment,
+	idFiliere int not null,
 	intitule varchar(50) not null,
 	descriptionFiliere text not null
 )ENGINE=InnoDB;
 
 create table branche (
 	id int not null primary key auto_increment,
-	idFilere int not null,
+	idFiliere int not null,
 	intitule varchar(50) not null,
 	descriptionBranche text not null,
 	foreign key(idFilere) references filiere(id)
