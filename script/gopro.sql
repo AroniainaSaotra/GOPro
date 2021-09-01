@@ -42,7 +42,7 @@ create table branche (
 	idFiliere int not null,
 	intitule varchar(50) not null,
 	descriptionBranche text not null,
-	foreign key(idFilere) references filiere(id)
+	foreign key(idFiliere) references filiere(id)
 )ENGINE=InnoDB;
 
 create table competence (
