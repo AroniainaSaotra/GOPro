@@ -31,7 +31,7 @@ class Branche extends DBTable{
 	function setId($id){
 		$this->id = $id;	
 	}
-	function setidFiliere($idFiliere){
+	function setIdFiliere($idFiliere){
 		$this->idFiliere = $idFiliere;
 	}
 	
