@@ -26,7 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	    public function getNameLc()
 	    {
-	    	return lcfirst((new ReflectionClass($this))->getName());
+	    	$lcfirst = (new ReflectionClass($this));
+
+	    	return lcfirst($lcfirst->getName());
 	    }
 
 	    public function getGettersOrSetters($choix)//si $choix = "get" -> retourne tous les getters,et inversement
