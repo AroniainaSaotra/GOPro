@@ -2,7 +2,7 @@
     if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
     require('PaiementOffre.php');
-
+    //lety eh!
     class OffreEmploi extends DBTable {
         private $id;
         private $idEntreprise;
