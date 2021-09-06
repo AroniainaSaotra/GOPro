@@ -93,7 +93,7 @@
         public function loginEntreprise($email, $mdp)
         {
             $motdepasse = sha1($mdp);
-            $sql1 = "SELECT count(*) as isa FROM Entreprise WHERE login = %s AND mdp = %s";
+            $sql1 = "SELECT count(*) as isa FROM Entreprise WHERE login ='%s' AND mdp = sha1('%s')";
             $sql1 = sprintf($sql1,$this->db->escape($email),$this->db->escape($motdepasse));
             $query = $this->db->query($sql1);
             $row = $query->row_array();
@@ -111,14 +111,6 @@
             $idEntreprise = $row['ID'];
             return $idEntreprisess;
         }
-
-        public function insertOffreEmploi($idEntreprise,$dateLimite,$ageMin,$ageMax,$dateInsertion,$idMetier)
-        {
-            $sql = "INSERT INTO offreEmploi(idEntreprise,dateLimite,ageMin,ageMax,dateInsertion,idMetier)VALUES(%s,%s,%s,%s,%s,%s)";
-            $sql = sprintf($sql,$this->db->escape($idEntreprise),$this->db->escape($dateLimite),$this->db->escape($ageMin),$this->db->escape($ageMax),$this->db->escape($dateInsertion),$this->db->escape($idMetier));
-            $this->db->query($sql);
-        }
-
         public function get_idMetier($nom)
         {
             $sql1 = "SELECT ID FROM metier WHERE nomMetier = %s ";
@@ -137,7 +129,7 @@
 
         public function deleteOffreEmploi($ID)
         {
-            $sql = "DELETE  FROM offreEmploi WHERE ID = %s";
+            $sql = "INSERT INTO supressionOffreEmploi  values(%d,SYSDATE())";
             $sql = sprintf($sql,$ID);
             $this->db->query($sql);
         }
