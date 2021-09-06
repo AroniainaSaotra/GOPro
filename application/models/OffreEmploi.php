@@ -12,9 +12,7 @@
 
         
         function __construct($id,$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
-<<<<<<< HEAD
             $this->id = $id;
-=======
             $this->idEntreprise = $idEntreprise;
             $this->dateLimite = $dateLimite
             $this->ageMin = $ageMin;
@@ -25,7 +23,6 @@
 
         function __construct(/*$id,*/$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
             //$this->id = $id;
->>>>>>> 01537c63528eb3d59dfb6da555b3406c4bb39bb7
             $this->idEntreprise = $idEntreprise;
             $this->dateLimite = $dateLimite
             $this->ageMin = $ageMin;
@@ -127,7 +124,7 @@
             $sql = sprintf($sql,$ID);
             $this->db->query($sql);
         }
-        
+            
     
 
 }
