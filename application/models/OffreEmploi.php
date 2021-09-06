@@ -135,10 +135,10 @@
         }
         public function listOffre($idEntreprise)
         {
-            $sql="SELECT * FROM offreEmploi WHERE idEntreprise=%d
+            $sql=sprintf("SELECT * FROM offreEmploi WHERE idEntreprise=%d
                   AND dateLimite>=SYSDATE() 
                   AND ID not in (select idOffreEmploi from supressionOffreEmploi) 
-                 ";
+                 ",$idEntreprise);
             $result = $this->db->query($requete)->row_array();
             $offre=array();
             foreach($result as $r){
@@ -148,7 +148,7 @@
         }
         public function historique($idEntreprise)
         {
-            $sql=sprintf("SELECT * from from offreEmploi where idEntreprise=%d",$idEntreprise);
+            $sql=sprintf("SELECT * from offreEmploi where idEntreprise=%d",$idEntreprise);
             $result = $this->db->query($sql)->row_array();
             $offre=array();
             foreach($result as $r)
@@ -168,6 +168,28 @@
             $id = $offre[0]->getId();
             $paiement = new PaiementOffre($id,"SYSDATE()");
             $paiement->insert();
+        }
+        public function ajoutCompetence($idOffreEmploi,$idCompetence)
+        {
+            $sql = "INSERT INTO competencesRequisesOffreEmploi  values(%d,%d)";
+            $sql = sprintf($sql,$idOffreEmploi,$idCompetence);
+            $this->db->query($sql);   
+        }
+        public function competencesRequises($idOffreEmploi)
+        {
+            $comp=new Competence();
+            $competences=array();
+            $sql=sprintf("SELECT * from  competencesRequisesOffreEmploi where idOffreEmploi=%d",$idOffreEmploi);
+            $result = $this->db->query($sql)->row_array();
+            $count=0;
+            foreach($result as $r)
+            {
+                $competences[$count]=new Competence();
+                $competences[$count]->setId($r['idCompetence']);
+                $competences[$count]=($competences[$count]->find(null))[0];
+                $count++;
+            }
+            return $competences;
         }
 
     }
