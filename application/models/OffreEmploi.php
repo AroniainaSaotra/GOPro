@@ -1,13 +1,9 @@
 <?php 
     if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-<<<<<<< HEAD
     require('PaiementOffre.php');
     //lety eh!
     class OffreEmploi extends DBTable {
-=======
-    class OffreEmploi extends DBTable { 
->>>>>>> ca0852482d31a80e6bb3e2bc932900164ce36fb9
         private $id;
         private $idEntreprise;
         private $dateLimite;
@@ -18,9 +14,6 @@
 
         
         function __construct($id,$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
-<<<<<<< HEAD
-            $this->id = $id;
-=======
             $this->idEntreprise = $idEntreprise;
             $this->dateLimite = $dateLimite
             $this->ageMin = $ageMin;
@@ -31,7 +24,6 @@
 
         function __construct(/*$id,*/$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
             //$this->id = $id;
->>>>>>> 01537c63528eb3d59dfb6da555b3406c4bb39bb7
             $this->idEntreprise = $idEntreprise;
             $this->dateLimite = $dateLimite
             $this->ageMin = $ageMin;
@@ -39,48 +31,63 @@
             $this->dateInsertion = $dateInsertion;
             $this->idMetier = $idMetier;
         }
+
         function setId($id){
             $this->id = $id;
         }
+
         function setIdEntreprise($idEntreprise){
             $this->idEntreprise = $idEntreprise;
         }
+
         function setDateLimite($dateLimite){
             $this->dateLimite = $dateLimite;
         }
+
         function setAgeMin($ageMin){
             $this->ageMin = $ageMin;
         }
+
         function setAgeMax($ageMax){
             $this->ageMax = $ageMax;
         }
+
         function setDateInsertion($dateInsertion){
             $this->dateInsertion=$dateInsertion;
         }
+
         function setIdMetier($idMetier){
             $this->idMetier=$idMetier;
         }
+
         function getId(){
             return $this->id;
         }
+
         function getIdEntreprise(){
             return $this->idEntreprise;
         }
+
         function getDateLimite(){
             return $this->dateLimite;
         }
+
         function getAgeMin(){
             return $this->ageMin;
         }
+
         function getAgeMax(){
             return $this->ageMax;
         }
+
         function getDateInsertion(){
             return $this->dateInsertion;
         }
+
         function getIdMetier(){
             return $this->idMetier;
         }
+
         public function loginEntreprise($email, $mdp)
         {
             $motdepasse = sha1($mdp);
@@ -102,7 +109,6 @@
             $idEntreprise = $row['ID'];
             return $idEntreprisess;
         }
-
 
         public function insertOffreEmploi($idEntreprise,$dateLimite,$ageMin,$ageMax,$dateInsertion,$idMetier)
         {
@@ -133,7 +139,33 @@
             $sql = sprintf($sql,$ID);
             $this->db->query($sql);
         }
-        
-    
+        public function listOffre($idEntreprise)
+        {
+            $sql="SELECT * FROM offreEmploi WHERE idEntreprise=%d
+                  AND dateLimite>=SYSDATE() 
+                  AND ID not in (select idOffreEmploi from supressionOffreEmploi) 
+                 ";
+            $result = $this->db->query($requete)->row_array();
+            $offre=array();
+            foreach($result as $r){
+                $offre[] = new OffreEmploi($r['id'],$r['idEntreprise'], $r['dateLimite'],$r['ageMin'],$r['ageMax'],$r['dateInsertion'],$r['idMetier']);
+            }
+            return $offre;
+        }
 
-}
+        public function nouvelleOffre($idEntreprise,$dateLimite,$ageMin,$ageMax,$idMetier){
+            $this->setIdEntreprise($idEntreprise);
+            $this->setDateLimite($dateLimite);
+            $this->setAgeMin($ageMin);
+            $this->setAgeMax($ageMax);
+            $this->setIdMetier($idMetier);
+            $this->insert();
+            $offre = $this->find("order by id desc");
+            $id = $offre[0]->getId();
+            $paiement = new PaiementOffre($id,"SYSDATE()");
+            $paiement->insert();
+        }
+
+    }
+
+?>
