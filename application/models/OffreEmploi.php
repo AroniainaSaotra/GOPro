@@ -169,6 +169,15 @@
             $paiement = new PaiementOffre($id,"SYSDATE()");
             $paiement->insert();
         }
+
+        public function showDiplome(){
+            $requete = sprintf("select d.*, b.intitule, n.intitule, n.niveau from diplomeRequisOffreEmploi d, branche b, niveauEtudes n where d.idOffreEmploi = %s and d.idBranche = b.idB and d.idNiveauEtudesMin = n.id",$this->getId());
+            //$result = $this->connection()->query($requete);
+            $result = $this->db->query($requete)->row_array();
+            return $result;
+        }
+
+        
         public function ajoutCompetence($idOffreEmploi,$idCompetence)
         {
             $sql = "INSERT INTO competencesRequisesOffreEmploi  values(%d,%d)";
