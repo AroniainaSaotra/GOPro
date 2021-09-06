@@ -154,7 +154,17 @@
             }
             return $offre;
         }
-
+        public function historique($idEntreprise)
+        {
+            $sql=sprintf("SELECT * from from offreEmploi where idEntreprise=%d",$idEntreprise);
+            $result = $this->db->query($sql)->row_array();
+            $offre=array();
+            foreach($result as $r)
+            {
+                $offre[] = new OffreEmploi($r['id'],$r['idEntreprise'], $r['dateLimite'],$r['ageMin'],$r['ageMax'],$r['dateInsertion'],$r['idMetier']);
+            }
+            return $offre;
+        }
         public function nouvelleOffre($idEntreprise,$dateLimite,$ageMin,$ageMax,$idMetier){
             $this->setIdEntreprise($idEntreprise);
             $this->setDateLimite($dateLimite);
