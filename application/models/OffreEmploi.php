@@ -13,6 +13,15 @@
         private $idMetier;
 
         
+        function __construct($id,$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
+            $this->idEntreprise = $idEntreprise;
+            $this->dateLimite = $dateLimite
+            $this->ageMin = $ageMin;
+            $this->ageMax = $ageMax;
+            $this->dateInsertion = $dateInsertion;
+            $this->idMetier = $idMetier;
+        }
+
         function __construct(/*$id,*/$idEntreprise, $dateLimite, $ageMin, $ageMax,$dateInsertion,$idMetier) {
             //$this->id = $id;
             $this->idEntreprise = $idEntreprise;
